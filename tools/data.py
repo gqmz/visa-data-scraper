@@ -10,7 +10,7 @@ from validators import ValidationFailure
 from validators.url import url
 
 #import global variables
-import tools.variables as variables
+import variables as variables
 
 #imports for dealing with datetime objects
 from dateutil.rrule import rrule, MONTHLY
@@ -18,6 +18,9 @@ from datetime import datetime
 
 #file manipulation
 import pathlib
+
+#parse arguments
+import argparse
 
 """
 Class definitions
@@ -283,6 +286,15 @@ class buildDatabase():
             data = pd.concat(table_list)
         return data
 
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
 
+    #https://stackoverflow.com/a/60999928
+    parser.add_argument('--all', action='store_true')
+
+    args = parser.parse_args()
+
+    #call buildDatabase() with input argument
+    db = buildDatabase(args.all)
 
     
