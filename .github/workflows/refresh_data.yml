@@ -23,7 +23,7 @@ jobs:
         python3 -m pip install -r requirements.txt
     - name: Refresh USCIS data
       run:
-        python3 parse_uscis_bulletin_pages.py
+        python3 tools/data.py
     - name: Commit and push if it changed #https://github.com/simonw/ca-fires-history/blob/main/.github/workflows/scrape.yml
       run: |-
         git config user.name "Automated"
