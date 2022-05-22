@@ -1,53 +1,7 @@
-# Visa Bulletin Visualizer
+# Data scraper for visa bulletin vizualizer
 
-Dash web app to visualize employment-based priority date data released by USCIS [link](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html). Specifically, data tables are pulled from every monthly bullentin since 2016 and plotted by visa class. The user can select data by country and insert a marker for priority date.
+Scrape monthly employment-based visa filing/final dates from [link](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html). The scraper runs on a monthly through Github Actions and updates /data/datalog.csv if new data is found.
 
-## Repository structure
+This data is the backend for the frontend app in [this repo](https://github.com/gqmz/visa-data-scraper.git).
 
-```
-.gitignore
-Procfile
-dash_plots.py
-data
-   |-- datalog.csv
-plots
-   |-- __init__.py
-   |-- dash_plots.py
-   |-- tutorial.py
-   |-- variables.py
-requirements.txt
-runtime.txt
-tests
-   |-- __init__.py
-   |-- test_getUrlData.py
-   |-- test_validUrl.py
-tools
-   |-- __init__.py
-   |-- data.py
-   |-- variables.py
-```
-Procfile, requirement.txt & runtime.txt are required to deploy the Dash web app on [Heroku](https://dashboard.heroku.com/login).
-
-## Usage
-
-### Repository setup
-
-To run this application, you'll need [Git](https://git-scm.com/) installed on your machine. From your command line:
-
-```
-# Clone this repository
-$ git clone https://github.com/gqmz/visa_bulletin_visualizer.git
-
-# Go in the repository
-$ cd visa_bulletin
-
-# Install dependencies
-$ pip install -r requirements.txt
-```
-
-### Launch Dash app locally
-
-```
-# Run the dash app on localhost
-$ python dash_app.py
-```
+Inspiration for scraping method: [link](https://simonwillison.net/2020/Oct/9/git-scraping/).
