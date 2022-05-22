@@ -79,6 +79,7 @@ class getUrlData():
         check for employment tables
         Post 2010 urls expect exactly 2 tables meeting criterion
         """
+        #TODO: starting may2022, check for string in table header
         employment_tables = [x for x in tables if len(x)==9] #employment tables have len=9
         if len(employment_tables)==2:
             try:
