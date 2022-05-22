@@ -1,0 +1,35 @@
+name: refresh bulletin data
+
+on:
+  push:
+  schedule:
+    - cron:  '*/10 * * * *'
+
+jobs:
+  refresh-data:
+    name: refresh visa bulletin data
+    runs-on: ubuntu-20.04
+
+    steps: 
+    - name: Checkout #checkout this repo
+      uses: actions/checkout@v2.4.2 #https://github.com/marketplace/actions/checkout
+    - name: Setup Python
+      uses: actions/setup-python@v3.1.2 #https://github.com/marketplace/actions/setup-python
+      with:
+        python-version: '3.8'
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
+    - name: Refresh USCIS data
+      run:
+        python3 parse_uscis_bulletin_pages.py
+    - name: Commit and push if it changed #https://github.com/simonw/ca-fires-history/blob/main/.github/workflows/scrape.yml
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest data: ${timestamp}" || exit 0
+        git push
+
